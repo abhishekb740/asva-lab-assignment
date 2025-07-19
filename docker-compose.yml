@@ -24,6 +24,10 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_started
     ports:
       - "${SERVER_PORT}:${SERVER_PORT}"
     environment:
@@ -33,9 +37,25 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       SERVER_PORT: ${SERVER_PORT}
       JWT_SECRET: ${JWT_SECRET}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      CACHE_TTL: 300
+      KAFKA_HOST: kafka
+      KAFKA_PORT: 9092
     volumes:
       - ./backend:/app
       - /app/node_modules
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis_cache
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   zookeeper:
     image: confluentinc/cp-zookeeper:7.6.0
