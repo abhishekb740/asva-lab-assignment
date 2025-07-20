@@ -1,4 +1,4 @@
-# Use Node.js 18 Alpine image
+# Use Node.js 20 Alpine image
 FROM node:20-alpine
 
 # Set working directory
