@@ -37,20 +37,27 @@ cd asva-lab-assignment
 
 ### 2. Environment Setup
 Create `.env` file in the root directory:
+
+**Option 1:** Simply copy the existing `.env.example` file:
+```bash
+cp .env.example .env
+```
+
+**Option 2:** Or create `.env` file manually with the following content:
 ```env
-# Database
-POSTGRES_USER=asvalab_user
-POSTGRES_PASSWORD=asvalab_password
-POSTGRES_DB=asvalab_db
+POSTGRES_USER=admin
+POSTGRES_PASSWORD=asvalabassignment
+POSTGRES_DB=AsvaLab
 POSTGRES_HOST=localhost
 
-# API
-SERVER_PORT=8000
-JWT_SECRET=secret-jwt-key
-
-# Frontend
 VITE_API_URL=http://localhost:8000
+
+SERVER_PORT=8000
+
+JWT_SECRET=YOUR_SECRET_KEY
 ```
+
+Either way, you'll be ready to run Docker Compose!
 
 ### 3. Start with Docker Compose
 ```bash
@@ -131,12 +138,6 @@ npm run migrate create <name>  # Create new migration
 ```bash
 # Backend tests
 cd backend && npm test
-
-# Frontend tests  
-cd frontend && npm test
-
-# Or run via Docker
-docker-compose exec api npm test
 ```
 
 ## API Overview
