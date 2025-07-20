@@ -5,6 +5,19 @@ const { connectKafka } = require('./src/config/kafka');
 
 const app = express();
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+  
+  next();
+});
+
 app.use(express.json());
 
 const authRoutes = require('./src/api/routes/auth');
@@ -34,8 +47,9 @@ async function startServer() {
     try {
         connectKafka();
         
-        app.listen(process.env.SERVER_PORT, () => {
-            console.log(`Server is running on port ${process.env.SERVER_PORT}`);
+        const port = process.env.SERVER_PORT || 8000;
+        app.listen(port, () => {
+            console.log(`Server is running on port ${port}`);
         });
     } catch (error) {
         console.error('Failed to start server:', error);

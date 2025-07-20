@@ -1,0 +1,39 @@
+.footer {
+  background: #1a1a2e;
+  color: white;
+  padding: 40px 20px 20px;
+  margin-top: auto;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.footer-logo h3 {
+  color: white;
+  margin: 0 0 8px 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.footer-logo p {
+  color: #9ca3af;
+  margin: 0;
+  font-size: 14px;
+}
+
+.footer-links {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid #374151;
+}
+
+.footer-links p {
+  color: #9ca3af;
+  margin: 0;
+  font-size: 14px;
+}
